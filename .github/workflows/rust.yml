@@ -54,6 +54,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          components: cargo-tarpaulin
           override: true
   
       - name: Run Cargo Tarpaulin
