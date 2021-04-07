@@ -57,6 +57,4 @@ jobs:
           override: true
   
       - name: Run Cargo Tarpaulin
-        uses: actions-rs/tarpaulin@v0.1.0
-        with:
-          args: '--ignore-tests'
+        run: cargo tarpaulin --ignore-tests
