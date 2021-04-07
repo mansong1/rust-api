@@ -23,4 +23,4 @@ jobs:
     - name: Audit
       uses: actions-rs/audit-check@v1.2.0
       with:
-        ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
