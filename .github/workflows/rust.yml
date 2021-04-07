@@ -50,12 +50,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Install Stable ToolChain
-        uses: actions-rs/toolchain@v1
+      - name: Install Tarpaulin
+        uses: actions-rs/cargo@v1.0.1
         with:
-          toolchain: stable
-          components: cargo-tarpaulin
-          override: true
+          command: install 
+          args: cargo-tarpaulin
   
       - name: Run Cargo Tarpaulin
         run: cargo tarpaulin --ignore-tests
