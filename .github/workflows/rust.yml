@@ -59,7 +59,7 @@ jobs:
       - name: Run Cargo Tarpaulin
         run: cargo tarpaulin --ignore-tests
 
-  dockerlint:
+  hadolint:
   
     name: Lint Dockerfile
     runs-on: ubuntu-latest
@@ -70,8 +70,8 @@ jobs:
         with:
           dockerfile: Dockerfile
   
-  testimage:
-    name: Test
+  scan:
+    name: Scan Image
     runs-on: ubuntu-latest
     
     steps:
