@@ -2,11 +2,13 @@ name: Create Tag
 on:
   workflow_run:
     workflows: ["CI"]
+    branches: ["main"]
     types:
       - completed
 
 jobs:
   tag:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Create Tag
     runs-on: ubuntu-latest
     steps:
