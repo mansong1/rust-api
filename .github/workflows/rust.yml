@@ -27,6 +27,7 @@ jobs:
     - name: Format Code
       run: cargo fmt --all -- --check
   lint:
+    name: Lint
     runs-on: ubuntu-latest
     
     steps:
@@ -48,4 +49,4 @@ jobs:
       steps:
       - uses: actions/checkout@v2
       - name: Run Cargo Tarpaulin
-        run: cargo tauplin --ignore-tests
+        run: cargo tarpaulin --ignore-tests
