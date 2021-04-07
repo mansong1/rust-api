@@ -67,8 +67,11 @@ jobs:
     steps:
       - name: Hadolint Action
         uses: brpaz/hadolint-action@v1.2.1
+        with:
+          dockerfile: ./Dockerfile
   
   scan:
+    needs: hadolint
     name: Scan Image
     runs-on: ubuntu-latest
     
