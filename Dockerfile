@@ -1,11 +1,11 @@
 FROM lukemathwalker/cargo-chef as planner
-WORKDIR app
+WORKDIR /app
 COPY . .
 # Compute a lock-like file for our project
 RUN cargo chef prepare  --recipe-path recipe.json
 
 FROM lukemathwalker/cargo-chef as cacher
-WORKDIR app
+WORKDIR /app
 COPY --from=planner /app/recipe.json recipe.json
 # Build our project dependencies, not our application!
 RUN cargo chef cook --release --recipe-path recipe.json
@@ -21,7 +21,7 @@ ENV SQLX_OFFLINE true
 RUN cargo build --release --bin api
 
 FROM debian:buster-slim AS runtime
-WORKDIR app
+WORKDIR /app
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends openssl \
     # Clean up
