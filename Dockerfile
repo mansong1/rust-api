@@ -11,13 +11,12 @@ COPY --from=planner /app/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 
 FROM rust:latest AS builder
-WORKDIR app
+WORKDIR /app
 # Copy over the cached dependencies
 COPY --from=cacher /app/target target
 COPY --from=cacher /usr/local/cargo /usr/local/cargo
 COPY . .
 # Build our application, leveraging the cached deps!
-ENV SQLX_OFFLINE true
 RUN cargo build --release --bin api
 
 FROM debian:buster-slim AS runtime
