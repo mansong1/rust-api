@@ -27,19 +27,25 @@ jobs:
     - name: Format Code
       run: cargo fmt --all -- --check
   lint:
-    name: Lint
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v2
-    - name: Run Linter
-      run: cargo clippy -- -D warnings
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        components: clippy
+        override: true
+    - uses: actions-rs/clippy-check@v1.0.7
+      with:
+        name: Linting
+        token: ${{ secrets.GITHUB_TOKEN }}
   
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --verbose
+  coverage:
+      name: Code Coverage
+      runs-on: ubuntu-latest
+      
+      steps:
+      - uses: actions/checkout@v2
+      - name: Run Cargo Tarpaulin
+        run: cargo tauplin --ignore-tests
