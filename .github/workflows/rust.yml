@@ -37,6 +37,9 @@ jobs:
         name: Clippy Lint
         token: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Hadolint Check
+      uses: jbergstroem/hadolint-gh-action@v1
+
   test:
       needs: lint
       name: Test
@@ -64,20 +67,9 @@ jobs:
   
       - name: Run Cargo Tarpaulin
         run: cargo tarpaulin --ignore-tests
-
-  hadolint:
-    needs: coverage
-    name: Lint Dockerfile
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Hadolint Action
-        uses: brpaz/hadolint-action@v1.2.1
-        with:
-          dockerfile: ./Dockerfile
   
   scan:
-    needs: hadolint
+    needs: coverage
     name: Scan Image
     runs-on: ubuntu-latest
     
