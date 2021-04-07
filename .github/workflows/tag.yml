@@ -1,0 +1,18 @@
+name: Create Tag
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  tag:
+    name: Create Tag
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Create and Push tag
+      uses: anothrNick/github-tag-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO_OWNER: mansong1
