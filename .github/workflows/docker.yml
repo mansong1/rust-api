@@ -2,10 +2,11 @@ name: Build and Push Image
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on creation of tag
   push:
+    branches:
+      - "!*"
     tags:
-      - 'v*'
+      - "v*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
