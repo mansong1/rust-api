@@ -1,12 +1,8 @@
 name: Build and Push Image
 
 # Controls when the action will run.
-on: 
-  push:
-    branches:
-      - "!*"
-    tags:
-      - "v*"
+on:
+  create
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
