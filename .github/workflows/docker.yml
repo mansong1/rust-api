@@ -1,12 +1,12 @@
 name: Build and Push Image
 
-# Controls when the action will run. 
-on:
+# Controls when the action will run.
+on: 
   push:
     branches:
       - "!*"
     tags:
-      - "v*
+      - "v*"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -53,3 +53,4 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
