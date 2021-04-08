@@ -91,4 +91,15 @@ jobs:
         with:
           image: "localbuild/testimage:${{ github.sha }}"
         
-     
+  createtag:
+    needs: scan
+    name: Create Tag
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Create and Push tag
+      uses: anothrNick/github-tag-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO_OWNER: mansong1
+        WITH_V: true
