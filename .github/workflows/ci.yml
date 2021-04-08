@@ -12,6 +12,7 @@ env:
 jobs:
 
   format:
+    name: Rust Format
     runs-on: ubuntu-latest
     
     steps:
