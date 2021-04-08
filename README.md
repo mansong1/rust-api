@@ -1,4 +1,4 @@
-[![Rust](https://github.com/mansong1/rust-api/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/mansong1/rust-api/actions/workflows/ci.yml)
+[![CI](https://github.com/mansong1/rust-api/actions/workflows/ci.yml/badge.svg)](https://github.com/mansong1/rust-api/actions/workflows/ci.yml)
 
 # rust-api
 
