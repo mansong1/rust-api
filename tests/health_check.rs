@@ -30,7 +30,7 @@ async fn test_health_check() {
 }
 
 fn start_app() {
-    let server = rust_api::run().expect("Failed to bind address");
+    let server = rust_api::run("127.0.0.1:0").expect("Failed to bind address");
 
     let _ = tokio::spawn(server);
 }
