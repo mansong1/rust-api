@@ -19,3 +19,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REPO_OWNER: mansong1
         WITH_V: true
+  setfailure:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    name: Set workflow to Failure
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set Failure status
+      run: exit 1
