@@ -17,7 +17,7 @@ COPY --from=cacher /app/target target
 COPY --from=cacher /usr/local/cargo /usr/local/cargo
 COPY . .
 # Build our application, leveraging the cached deps!
-RUN cargo build --release --bin api
+RUN cargo build --release --bin rust_api
 
 FROM debian:buster-slim AS runtime
 WORKDIR /app
@@ -25,7 +25,7 @@ RUN apt-get update -y \
     && apt-get install -y --no-install-recommends openssl=1.1.1 \
     # Clean up
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
-COPY --from=builder /app/target/release/api api
+COPY --from=builder /app/target/release/rust_api rust_api
 COPY configuration configuration
 ENV APP_ENVIRONMENT production
-ENTRYPOINT ["./api"]
+ENTRYPOINT ["./rust_api"]
