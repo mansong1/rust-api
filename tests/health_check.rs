@@ -11,15 +11,29 @@ cargo add reqwest --dev --vers 0.11
 cargo add tokio --dev --vers 1
 
 */
+use std::net::TcpListener;
+
+
+fn start_app() -> String {
+    let listener = TcpListener::bind("127.0.0.1:0")
+        .expect("Failed to bind to random port");
+    let port = listener.local_addr().unwrap().port();
+
+    let server = rust_api::run(listener).expect("Failed to bind address");
+
+    let _ = tokio::spawn(server);
+    // return application address to caller!
+    format!("http://127.0.0.1:{}", port)
+}
 
 #[actix_rt::test]
 async fn test_health_check() {
-    start_app();
 
+    let address = start_app();
     let client = reqwest::Client::new();
 
     let response = client
-        .get("http://127.0.0.1:8000/health_check")
+        .get(&format!("{}/health_check", &address))
         .send()
         .await
         .expect("Failed to execute request. ");
@@ -29,8 +43,3 @@ async fn test_health_check() {
     assert_eq!(Some(0), response.content_length());
 }
 
-fn start_app() {
-    let server = rust_api::run("127.0.0.1:0").expect("Failed to bind address");
-
-    let _ = tokio::spawn(server);
-}
